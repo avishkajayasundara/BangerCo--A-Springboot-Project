@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -83,19 +88,19 @@ public class VehicleController {
         }
         Vehicle.setAvailability("AVAILABLE");
         if (file != null) {
-//
-//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//            Vehicle.setImageName(fileName);
-//
-//            try {
-//                Path path = Paths.get("C:\\Users\\User\\Desktop\\EIRLS\\BangerCoEirlss\\src\\asset\\images" + fileName);
-//                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
 
-                String fileName = storageService.uploadFile(file);
-                Vehicle.setImageName(fileName);
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            Vehicle.setImageName(fileName);
+
+            try {
+                Path path = Paths.get("C:\\Users\\User\\Desktop\\EIRLS\\BangerCoEirlss\\src\\main\\webapp\\images\\" + fileName);
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//                String fileName = storageService.uploadFile(file);
+//                Vehicle.setImageName(fileName);
 
 
         }

@@ -57,8 +57,6 @@ public class JwtAuthenticationController {
 		String state = loginUser.getState();
 			
 		return ResponseEntity.ok(new JwtResponse(token,userName,type,firstName,lastName,userId,drivingLicense,state));
-			
-		
 
 		//return ResponseEntity.ok(new JwtResponse(token,"","","",""));
 	}
