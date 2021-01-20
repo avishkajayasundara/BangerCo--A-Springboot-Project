@@ -5,6 +5,7 @@
   Time: 4:43 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -57,23 +58,36 @@
             <ul class="list-unstyled components">
 
                 <li class="active">
-                    <a href="#home">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#about">About</a>
+                    <a href="/#about">About</a>
                 </li>
                 <li>
-                    <a href="#why_choose_us">why Choose Us</a>
+                    <a href="/#why_choose_us">why Choose Us</a>
                 </li>
-                <li>
-                    <a href="#testimonial">ALl Vehicles</a>
-                </li>
-                <li>
-                    <a href="#testimonial">Testimonial</a>
-                </li>
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
+                <c:set var="user" value="${user}"/>
+                <c:choose>
+                    <c:when test="${user != null}">
+                        <li>
+                            <a href="/user/account">Account</a>
+                        </li>
+                        <li>
+                            <a href="/vehicles">Rent A Vehicle</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/user-register">Sign Up</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
 
         </nav>
@@ -94,7 +108,7 @@
                                 <div class="col-lg-3 logo_section">
                                     <div class="full">
                                         <div class="center-desk">
-                                            <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="#"></a> </div>
+                                            <div class="logo"> <a href="/"><img src="images/logo.png" alt="#"></a> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -127,38 +141,34 @@
         </section>
         <!-- end section -->
         <!-- section -->
-        <div style="margin-top:30px" class="section layout_padding padding_top_0">
+        <div class="section layout_padding padding_top_0">
             <div class="container">
+                <div style="padding-top:30px" class="row">
+                    <h5 style="text-align:center;font-size:24px;font-weight: bold">Please note that according to company policy Customers who are below 25 years are only allowed to rent Small Town Cars</h5>
+                </div>
                 <div class="row">
-                    <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <c:forEach var="vehicle" items="${vehicles}">
+                        <c:url value="/bookings/new-booking" var="url">
+                            <c:param name="vehicleId" value="${vehicle.vehicleId}"/>
+                        </c:url>
+                        <div class="col-sm">
+                            <div style="margin-top:25px" class="card" style="width: 20rem;">
+                                <img style="width:20rem; height:250px" class="card-img-top"
+                                     src="./images/${vehicle.imageName}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Licence Plate Number - ${vehicle.plateNumber}</h5>
+                                    <p style="font-size:14px" class="card-text">Transmission
+                                        - ${vehicle.transmission}</p>
+                                    <p style="font-size:14px" class="card-text">Fuel Type - ${vehicle.fuelType}</p>
+                                    <p style="font-size:14px" class="card-text">Price Per Day -
+                                        $${vehicle.pricePerDay}</p>
+                                    <a style="margin-top:10px;border-color:#161c34;background-color: #161c34" href="${url}" class="btn btn-primary">Book Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:forEach>
                     <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

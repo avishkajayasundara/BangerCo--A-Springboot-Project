@@ -30,6 +30,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 			dto.setEquipmentName(v.getEquipmentName());
 			dto.setDescription(v.getDescription());
 			dto.setAvailability(v.getAvailability());
+			dto.setAvailableQuantity(v.getAvailableQuantity());
 			map.put(v.getEquipmentId(), dto);
 		}
 		return map;

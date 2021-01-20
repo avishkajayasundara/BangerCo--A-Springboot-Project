@@ -17,13 +17,13 @@ public interface UserService {
     void save(User user);
     User get(long id);
     ModelUser getUser(long id);
-    ResponseEntity<JwtResponse> registerUser(String username, String email, String password, String firstName, String lastName,
-                                             String dateOfBirth, String contact, String DrivingLicense, String Address, MultipartFile file) throws NoSuchAlgorithmException;
+    User registerUser(String username, String email, String password, String firstName, String lastName,
+                                             String dateOfBirth, String contact, MultipartFile DrivingLicense, String Address, MultipartFile file) throws NoSuchAlgorithmException;
     User getByUserName(String username) throws NoSuchAlgorithmException;
     void delete(long id);
     boolean isValid(User user);
     HashMap<Long, User> getPendingCustomers();
-    void uploadUserUtility(MultipartFile file, Long userid);
+    void uploadUserUtility(MultipartFile file,MultipartFile licence, User user);
     void approveUser(Long userId, String state);
 
 }

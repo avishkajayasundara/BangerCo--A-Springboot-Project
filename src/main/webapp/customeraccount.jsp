@@ -21,15 +21,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
     <!-- Responsive-->
-    <link type="text/css" rel="stylesheet" href="css/responsive.css">
+    <link type="text/css" rel="stylesheet" href="../css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="" type="image/gif" />
+    <link rel="icon" href="" type="image/gif"/>
     <!-- Scrollbar Custom CSS -->
-    <link type="text/css" rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
     <!-- awesome fontfamily -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Tweaks for older IEs-->
@@ -41,7 +41,7 @@
 <body class="main-layout">
 <!-- loader  -->
 <div class="loader_bg">
-    <div class="loader"><img src="images/loading.gif" alt="" /></div>
+    <div class="loader"><img src="../images/loading.gif" alt=""/></div>
 </div>
 <!-- end loader -->
 
@@ -70,7 +70,7 @@
                 <c:choose>
                     <c:when test="${user != null}">
                         <li>
-                            <a href="/user/account">Account</a>
+                            <a href="#">Account</a>
                         </li>
                         <li>
                             <a href="/vehicles">Rent A Vehicle</a>
@@ -108,19 +108,23 @@
                                 <div class="col-lg-3 logo_section">
                                     <div class="full">
                                         <div class="center-desk">
-                                            <div class="logo"> <a href="/"><img src="images/logo.png" alt="#"></a> </div>
+                                            <div class="logo"><a href="/"><img src="../images/logo.png" alt="#"></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="right_header_info">
                                         <ul>
-                                            <li><img style="margin-right: 15px;" src="images/phone_icon.png" alt="#" /><a href="#">987-654-3210</a></li>
-                                            <li><img style="margin-right: 15px;" src="images/mail_icon.png" alt="#" /><a href="#">bangerco@gmail.com</a></li>
-                                            <li><img src="images/search_icon.png" alt="#" /></li>
+                                            <li><img style="margin-right: 15px;" src="../images/phone_icon.png"
+                                                     alt="#"/><a
+                                                    href="#">987-654-3210</a></li>
+                                            <li><img style="margin-right: 15px;" src="../images/mail_icon.png" alt="#"/><a
+                                                    href="#">bangerco@gmail.com</a></li>
+                                            <li><img src="../images/search_icon.png" alt="#"/></li>
                                             <li>
                                                 <button type="button" id="sidebarCollapse">
-                                                    <img src="images/menu_icon.png" alt="#" />
+                                                    <img src="../images/menu_icon.png" alt="#"/>
                                                 </button>
                                             </li>
                                         </ul>
@@ -145,84 +149,105 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="full center">
-                            <h2 class="heading_main orange_heading">Sign Up</h2>
+                            <h2 class="heading_main orange_heading">Your Account</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                        <div class="full">
+                    <div style="width:35%" class="column">
+                        <div class=" full margin_top_30">
+                            <h3 style="font-size:24px;text-align:center" class="main_heading _left_side margin_top_30">
+                                Account Details</h3>
                             <div class="contact_form">
-                                <form action="/user/userRegister" method="post" enctype="multipart/form-data">
+                                <form action="/user/update" method="post" enctype="multipart/form-data">
                                     <fieldset class="row">
                                         <div class="col-md-12">
                                             <div class="full field">
-                                                First Name
-                                                <input type="text" placeholder="First Name" name="firstName"/>
+                                                Full Name
+                                                <input disabled type="text"
+                                                       value="${profile.firstName} ${profile.lastName}" name="name"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
-                                                Last Name
-                                                <input type="text" placeholder="Last Name" name="lastName"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="full field">
-                                               Email
-                                                <input type="email" placeholder="Email" name="email"/>
+                                                Email
+                                                <input disabled type="email" value="${profile.email}" name="email"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
                                                 Contact Number
-                                                <input type="text" placeholder="Phone" name="mobile"/>
+                                                <input type="text" value="${profile.contact}" name="mobile"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
                                                 Date of Birth
-                                                <input type="date" name=dob id="dob" required="required">
+                                                <input disabled value="${profile.dateOfBirth}" type="text" name=dob
+                                                       id="dob" required="required">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
                                                 Address
-                                                <input type="text" placeholder="Address" name="Address"/>
+                                                <input type="text" value="${profile.address}" name="Address"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="half field">
                                                 Username
-                                                <input type="text" placeholder="Username" name="userName"/>
+                                                <input disabled type="text" value="${profile.userName}"
+                                                       name="userName"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="half field">
                                                 Password
-                                                <input type="password" placeholder="Password" name="password"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Utility Bill
-                                                <input type="file" name="file"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Driving Licence
-                                                <input type="file" name="licencefile"/>
+                                                <input type="password" value="${profile.password}" name="password"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full center">
-                                                <input class="submit_bt btn btn-primary" value="Register" type="submit" name="Register"/>
+                                                <input class="submit_bt btn btn-primary" value="Update Details"
+                                                       type="submit" name="Update Details"/>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div style="width:65%"  class="column">
+                        <div class="row">
+                            <div class="margin_top_30">
+                                <h3 style="font-size:24px;text-align:center;margin-left: 50px" class="main_heading _left_side margin_top_30">
+                                    Bookings</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <c:forEach var="booking" items="${bookings}">
+                                <div class="col-sm">
+                                    <div class="card" style="width: 13rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Vehicle
+                                                : ${booking.vehicleList.get(0).vehicleType.vehicleType}</h5>
+                                            <p style="font-size:11px" class="card-text">Vehicle Plate Number
+                                                : ${booking.vehicleList.get(0).plateNumber}</p>
+                                            <p style="font-size:11px" class="card-text">Starting Date
+                                                : ${booking.startDate}</p>
+                                            <p style="font-size:11px" class="card-text">Ending Date
+                                                : ${booking.endDate}</p>
+                                            <a style="margin-top:10px" href="#" class="btn btn-primary">Update
+                                                Booking</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div class="col-sm">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -253,7 +278,7 @@
                             <form>
                                 <fieldset>
                                     <div class="field">
-                                        <input type="email" name="mail" placeholder="Enter your email" />
+                                        <input type="email" name="mail" placeholder="Enter your email"/>
                                     </div>
                                     <div class="field">
                                         <button class="submit_bt">Sumbit</button>
@@ -280,7 +305,8 @@
                         <div class="full">
                             <h4 class="widget_heading">Contact Details</h4>
                             <div class="full cont_footer">
-                                <p><strong>Banger&Co : Adderess</strong><br><br>Newyork 10012, USA<br>Phone: +987 654 3210<br>demo@gmail.com</p>
+                                <p><strong>Banger&Co : Adderess</strong><br><br>Newyork 10012, USA<br>Phone: +987 654
+                                    3210<br>demo@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -296,7 +322,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="full">
-                            <p>© 2019 All Rights Reserved. Design by <a href="https://html.design">Free Html Templates</a></p>
+                            <p>© 2019 All Rights Reserved. Design by <a href="https://html.design">Free Html
+                                Templates</a></p>
                         </div>
                     </div>
                 </div>
@@ -311,12 +338,12 @@
 <div class="overlay"></div>
 
 <!-- Javascript files-->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <!-- Scrollbar Js Files -->
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../js/custom.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#sidebar").mCustomScrollbar({
@@ -336,27 +363,5 @@
         });
     });
 </script>
-
-<script>
-    // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-    // Australia.
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: {lat: 40.645037, lng: -73.880224},
-        });
-
-        var image = 'images/location_point.png';
-        var beachMarker = new google.maps.Marker({
-            position: {lat: 40.645037, lng: -73.880224},
-            map: map,
-            icon: image
-        });
-    }
-</script>
-<!-- google map js -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
-<!-- end google map js -->
-
 </body>
 </html>

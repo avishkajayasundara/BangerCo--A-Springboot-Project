@@ -3,30 +3,17 @@ package com.eirlss.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userid;	
-	
-	@Column(unique=true)
-	private String userName;	
-	private String password;
-	private String email;
+public class User extends SystemUser{
+
 	private String firstName;
 	private String lastName;
 	private LocalDate dateOfBirth;
 	private String address;
 	private String contact;
-	private String state;
 	private String type;
 	private String drivingLinence;
 	private String statement;
@@ -41,36 +28,18 @@ public class User {
 	
 	public User() {}
 
-	public Long getUserid() {
-		return userid;
-	}
-
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public User(Long userid, String userName, String password, String email, String role, String state, String firstName, String lastName, LocalDate dateOfBirth, String address, String contact, String type, String drivingLinence, String statement, String utilityBill, List<Booking> booking) {
+		super(userid, userName, password, email, role, state);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.contact = contact;
+		this.type = type;
+		this.drivingLinence = drivingLinence;
+		this.statement = statement;
+		this.utilityBill = utilityBill;
+		this.booking = booking;
 	}
 
 	public String getFirstName() {
@@ -119,14 +88,6 @@ public class User {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	public String getType() {

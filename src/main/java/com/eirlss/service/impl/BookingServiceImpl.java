@@ -71,32 +71,25 @@ public class BookingServiceImpl implements BookingService {
         BookingDto bookingDtoResponse = null;
         List<Equipment> equipmentList = null;
         User user = userRepository.findById(bookingDto.getUserId()).orElse(null);
-        if (nonNull(user) && user.getState().equals(USER_BLACKLISTED)) {
-            throw new GenericException("User Blacklisted: Booking Blocked");
-        }
-        if (nonNull(user) && isLicenseBlacklisted(user.getDrivingLinence())) {
-            emailService.sendEmail(emailSubject, constructEmailMessageBody(user), "system_noreply", to_address);
-            throw new GenericException("Blacklisted license: Booking Blocked");
-        }
-        if (nonNull(user) && bookingHelper.isFraudUser(user.getUserName())) {
-            throw new GenericException("Fraud User: User marked as fraud");
-        }
+//        if (nonNull(user) && isLicenseBlacklisted(user.getDrivingLinence())) {
+//            emailService.sendEmail(emailSubject, constructEmailMessageBody(user), "system_noreply", to_address);
+//            throw new GenericException("Blacklisted license: Booking Blocked");
+//        }
+//        if (nonNull(user) && bookingHelper.isFraudUser(user.getUserName())) {
+//            throw new GenericException("Fraud User: User marked as fraud");
+//        }
         Vehicle vehicle = vehicleRepository.findById(bookingDto.getVehicleId()).orElse(null);
-        if (nonNull(user) && getCustomerAge(user) < 25) {
-            if (!vehicle.getVehicleType().getVehicleType().equals(SMALL_TOWN_CARS))
-                throw new GenericException("Age Restriction: You can only book Small Town Cars");
-        }
         if (!isEmpty(bookingDto.getEquipmentId())) {
             equipmentList = bookingDto.getEquipmentId()
                     .stream().map(this::constructEquipmentList)
                     .collect(Collectors.toList());
         }
-
         if (nonNull(user) && nonNull(vehicle)) {
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             Booking booking = new Booking();
-            LocalDateTime startDate = parse(bookingDto.getStartDate(), formatter);
-            LocalDateTime endDate = parse(bookingDto.getEndDate(), formatter);
+            LocalDateTime startDate = parse(bookingDto.getStartDate()+" 00:00", formatter);
+            LocalDateTime endDate = parse(bookingDto.getEndDate()+" 00:00", formatter);
             booking.setStartDate(startDate);
             booking.setEndDate(endDate);
             booking.setState("B");
@@ -108,6 +101,8 @@ public class BookingServiceImpl implements BookingService {
                 equipmentList.forEach(equipment -> equipment.getBookings().add(booking));
                 booking.setEquipmentList(equipmentList);
             }
+            userRepository.save(user);
+            vehicleRepository.save(vehicle);
             bookingResponse = bookingRepository.save(booking);
         }
         if (nonNull(bookingResponse)) {

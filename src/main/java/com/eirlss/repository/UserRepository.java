@@ -15,13 +15,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //	@Query(value = "SELECT * FROM user u WHERE u.username = ?1",nativeQuery = true)
 //	Collection<User> findAllActiveUsersNative(@Param("userName") String userName);
 
-	@Query(value = "SELECT * FROM user u WHERE u.username = ?1 AND u.password = ?2", nativeQuery = true)
-	List<User> findUserByuserNAme(String userName, String password);
-
-	@Query(value = "SELECT * FROM user u WHERE u.username = ?1", nativeQuery = true)
-	List<User> findUserByuserNAme(String userName);
 
 	@Query(value = "SELECT * FROM user u WHERE u.state = 'pending'", nativeQuery = true)
 	List<User> getPendingUsers();
+
+	User findByUserName(String userName);
 
 }

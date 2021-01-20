@@ -18,11 +18,20 @@ public class Equipment {
 	private String equipmentName;
 	private String description;
 	private boolean availability;
+	private int availableQuantity;
 	@ManyToMany(mappedBy="equipmentList")
 	private List<Booking> bookings;
 	
 	public Equipment() {
 		
+	}
+
+	public int getAvailableQuantity() {
+		return availableQuantity;
+	}
+
+	public void setAvailableQuantity(int availableQuantity) {
+		this.availableQuantity = availableQuantity;
 	}
 
 	public List<Booking> getBookings() {

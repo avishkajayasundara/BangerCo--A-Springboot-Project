@@ -16,18 +16,28 @@ public class EquipmentDto {
 	private String equipmentName;
 	private String description;
 	private boolean availability;
-	
+	private int availableQuantity;
+
 	public EquipmentDto() {
 		
 	}
-	
-	public EquipmentDto(Long equipmentId, String equipmentName, String description, boolean availability) {
-	
+
+	public EquipmentDto(Long equipmentId, String equipmentName, String description, boolean availability, int availableQuantity) {
 		this.equipmentId = equipmentId;
 		this.equipmentName = equipmentName;
 		this.description = description;
 		this.availability = availability;
+		this.availableQuantity = availableQuantity;
 	}
+
+	public int getAvailableQuantity() {
+		return availableQuantity;
+	}
+
+	public void setAvailableQuantity(int availableQuantity) {
+		this.availableQuantity = availableQuantity;
+	}
+
 	public Long getEquipmentId() {
 		return equipmentId;
 	}

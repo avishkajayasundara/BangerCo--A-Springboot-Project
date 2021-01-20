@@ -27,7 +27,7 @@
     <!-- Responsive-->
     <link type="text/css" rel="stylesheet" href="css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="" type="image/gif" />
+    <link rel="icon" href="" type="image/gif"/>
     <!-- Scrollbar Custom CSS -->
     <link type="text/css" rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <!-- awesome fontfamily -->
@@ -41,7 +41,7 @@
 <body class="main-layout">
 <!-- loader  -->
 <div class="loader_bg">
-    <div class="loader"><img src="images/loading.gif" alt="" /></div>
+    <div class="loader"><img src="images/loading.gif" alt=""/></div>
 </div>
 <!-- end loader -->
 
@@ -58,23 +58,36 @@
             <ul class="list-unstyled components">
 
                 <li class="active">
-                    <a href="#home">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="#about">About</a>
+                    <a href="/#about">About</a>
                 </li>
                 <li>
-                    <a href="#why_choose_us">why Choose Us</a>
+                    <a href="/#why_choose_us">why Choose Us</a>
                 </li>
-                <li>
-                    <a href="#testimonial">ALl Vehicles</a>
-                </li>
-                <li>
-                    <a href="#testimonial">Testimonial</a>
-                </li>
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
+                <c:set var="user" value="${user}"/>
+                <c:choose>
+                    <c:when test="${user != null}">
+                        <li>
+                            <a href="/user/account">Account</a>
+                        </li>
+                        <li>
+                            <a href="/vehicles">Rent A Vehicle</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                        <li>
+                            <a href="/user-register">Sign Up</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
 
         </nav>
@@ -96,19 +109,22 @@
                                 <div class="col-lg-3 logo_section">
                                     <div class="full">
                                         <div class="center-desk">
-                                            <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="#"></a> </div>
+                                            <div class="logo"><a href="/"><img src="images/logo.png"
+                                                                                        alt="#"></a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="right_header_info">
                                         <ul>
-                                            <li><img style="margin-right: 15px;" src="images/phone_icon.png" alt="#" /><a href="#">987-654-3210</a></li>
-                                            <li><img style="margin-right: 15px;" src="images/mail_icon.png" alt="#" /><a href="#">bangerco@gmail.com</a></li>
-                                            <li><img src="images/search_icon.png" alt="#" /></li>
+                                            <li><img style="margin-right: 15px;" src="images/phone_icon.png" alt="#"/><a
+                                                    href="#">987-654-3210</a></li>
+                                            <li><img style="margin-right: 15px;" src="images/mail_icon.png" alt="#"/><a
+                                                    href="#">bangerco@gmail.com</a></li>
+                                            <li><img src="images/search_icon.png" alt="#"/></li>
                                             <li>
                                                 <button type="button" id="sidebarCollapse">
-                                                    <img src="images/menu_icon.png" alt="#" />
+                                                    <img src="images/menu_icon.png" alt="#"/>
                                                 </button>
                                             </li>
                                         </ul>
@@ -136,10 +152,10 @@
                                         <!-- The slideshow -->
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
-                                                <img src="images/slider_1.png" alt="#" />
+                                                <img src="images/slider_1.png" alt="#"/>
                                             </div>
                                             <div class="carousel-item">
-                                                <img src="images/slider_2.png" alt="#" />
+                                                <img src="images/slider_2.png" alt="#"/>
                                             </div>
                                         </div>
                                         <div class="full center">
@@ -164,13 +180,12 @@
         <!-- section -->
         <div id="about" class="section layout_padding">
             <div class="container">
-
                 <div class="row">
-
                     <div class="col-lg-4 margin_top_30">
                         <div class="full margin_top_30">
                             <h3 class="main_heading _left_side margin_top_30">About Us</h3>
-                            <p class="large">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod..</p>
+                            <p class="large">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod..</p>
                         </div>
                         <div class="full button_section margin_top_30">
                             <a href="#">Read More</a>
@@ -179,7 +194,9 @@
 
                     <div class="col-lg-8">
                         <div class="full margin_top_50_rs">
-                            <img class="img-responsive" src="https://www.pngitem.com/pimgs/m/281-2817783_mini-png-mini-cooper-2016-4-door-transparent.png" alt="#" />
+                            <img class="img-responsive"
+                                 src="https://www.pngitem.com/pimgs/m/281-2817783_mini-png-mini-cooper-2016-4-door-transparent.png"
+                                 alt="#"/>
                         </div>
                     </div>
 
@@ -194,18 +211,18 @@
             <div class="container">
                 <div class="row">
                     <c:forEach var="vehicle" items="${vehicles}">
-                        <c:url value = "/" var = "url">
-                            <c:param name = "vehicleId" value = "${vehicle.vehicleId}"/>
-                        </c:url>
                         <div class="col-sm">
                             <div style="margin-top:25px" class="card" style="width: 20rem;">
-                                <img style="width:20rem; height:250px" class="card-img-top" src="./images/${vehicle.imageName}" alt="Card image cap">
+                                <img style="width:20rem; height:250px" class="card-img-top"
+                                     src="./images/${vehicle.imageName}" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Licence Plate Number - ${vehicle.plateNumber}</h5>
-                                    <p style="font-size:14px" class="card-text">Transmission - ${vehicle.transmission}</p>
+                                    <p style="font-size:14px" class="card-text">Transmission
+                                        - ${vehicle.transmission}</p>
                                     <p style="font-size:14px" class="card-text">Fuel Type - ${vehicle.fuelType}</p>
-                                    <p style="font-size:14px" class="card-text">Price Per Day - $${vehicle.pricePerDay}</p>
-                                    <a style="margin-top:10px" href="#" class="btn btn-primary">Book Now</a>
+                                    <p style="font-size:14px" class="card-text">Price Per Day -
+                                        $${vehicle.pricePerDay}</p>
+                                    <a style="margin-top:10px;border-color:#161c34;background-color: #161c34" href="/vehicles" class="btn btn-primary">Booking Page</a>
                                 </div>
                             </div>
                         </div>
@@ -232,27 +249,30 @@
                     <div class="col-lg-4">
                         <div class="full">
                             <div class="choose_blog text_align_center">
-                                <img src="images/c1_icon.png" />
+                                <img src="images/c1_icon.png"/>
                                 <h4>FINANCING MADE EASY</h4>
-                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
+                                    interested.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="full">
                             <div class="choose_blog text_align_center">
-                                <img src="images/c2_icon.png" />
+                                <img src="images/c2_icon.png"/>
                                 <h4>WIDE RANGE OF BRANDS</h4>
-                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
+                                    interested.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="full">
                             <div class="choose_blog text_align_center">
-                                <img src="images/c3_icon.png" />
+                                <img src="images/c3_icon.png"/>
                                 <h4>TRUSTED BY THOUSANDS</h4>
-                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+                                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
+                                    interested.</p>
                             </div>
                         </div>
                     </div>
@@ -292,11 +312,17 @@
                                         <div class="testomonial_section">
                                             <div class="full center">
                                                 <div class="client_img">
-                                                    <img src="images/testimonial.png" alt="#" />
+                                                    <img src="images/testimonial.png" alt="#"/>
                                                 </div>
                                             </div>
                                             <div class="full testimonial_cont text_align_center">
-                                                <p><strong>Due markes</strong><br><strong class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess</i></p>
+                                                <p><strong>Due markes</strong><br><strong
+                                                        class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit
+                                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                                                    ess</i></p>
                                                 <div class="full text_align_center margin_top_30">
                                                     <img src="images/testimonial_qoute.png">
                                                 </div>
@@ -309,11 +335,17 @@
                                         <div class="testomonial_section">
                                             <div class="full center">
                                                 <div class="client_img">
-                                                    <img src="images/testimonial.png" alt="#" />
+                                                    <img src="images/testimonial.png" alt="#"/>
                                                 </div>
                                             </div>
                                             <div class="full testimonial_cont text_align_center">
-                                                <p><strong>Due markes</strong><br><strong class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess</i></p>
+                                                <p><strong>Due markes</strong><br><strong
+                                                        class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit
+                                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                                                    ess</i></p>
                                                 <div class="full text_align_center margin_top_30">
                                                     <img src="images/testimonial_qoute.png">
                                                 </div>
@@ -327,11 +359,17 @@
                                         <div class="testomonial_section">
                                             <div class="full center">
                                                 <div class="client_img">
-                                                    <img src="images/testimonial.png" alt="#" />
+                                                    <img src="images/testimonial.png" alt="#"/>
                                                 </div>
                                             </div>
                                             <div class="full testimonial_cont text_align_center">
-                                                <p><strong>Due markes</strong><br><strong class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit ess</i></p>
+                                                <p><strong>Due markes</strong><br><strong
+                                                        class="ornage_color">Rental</strong><br><i>Lorem ipsum dolor sit
+                                                    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                                                    ess</i></p>
                                                 <div class="full text_align_center margin_top_30">
                                                     <img src="images/testimonial_qoute.png">
                                                 </div>
@@ -368,17 +406,17 @@
                                     <fieldset class="row">
                                         <div class="col-md-12">
                                             <div class="full field">
-                                                <input type="text" placeholder="Your Name" name="name" />
+                                                <input type="text" placeholder="Your Name" name="name"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
-                                                <input type="email" placeholder="Email" name="email" />
+                                                <input type="email" placeholder="Email" name="email"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full field">
-                                                <input type="text" placeholder="Phone" name="number" />
+                                                <input type="text" placeholder="Phone" name="number"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -433,7 +471,7 @@
                             <form>
                                 <fieldset>
                                     <div class="field">
-                                        <input type="email" name="mail" placeholder="Enter your email" />
+                                        <input type="email" name="mail" placeholder="Enter your email"/>
                                     </div>
                                     <div class="field">
                                         <button class="submit_bt">Sumbit</button>
@@ -460,7 +498,8 @@
                         <div class="full">
                             <h4 class="widget_heading">Contact Details</h4>
                             <div class="full cont_footer">
-                                <p><strong>Banger&Co : Adderess</strong><br><br>Newyork 10012, USA<br>Phone: +987 654 3210<br>demo@gmail.com</p>
+                                <p><strong>Banger&Co : Adderess</strong><br><br>Newyork 10012, USA<br>Phone: +987 654
+                                    3210<br>demo@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -476,7 +515,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="full">
-                            <p>© 2019 All Rights Reserved. Design by <a href="https://html.design">Free Html Templates</a></p>
+                            <p>© 2019 All Rights Reserved. Design by <a href="https://html.design">Free Html
+                                Templates</a></p>
                         </div>
                     </div>
                 </div>

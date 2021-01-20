@@ -21,15 +21,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- style css -->
-    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
     <!-- Responsive-->
-    <link type="text/css" rel="stylesheet" href="css/responsive.css">
+    <link type="text/css" rel="stylesheet" href="../css/responsive.css">
     <!-- fevicon -->
     <link rel="icon" href="" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
-    <link type="text/css" rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
     <!-- awesome fontfamily -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Tweaks for older IEs-->
@@ -41,7 +41,7 @@
 <body class="main-layout">
 <!-- loader  -->
 <div class="loader_bg">
-    <div class="loader"><img src="images/loading.gif" alt="" /></div>
+    <div class="loader"><img src="../images/loading.gif" alt="" /></div>
 </div>
 <!-- end loader -->
 
@@ -108,19 +108,19 @@
                                 <div class="col-lg-3 logo_section">
                                     <div class="full">
                                         <div class="center-desk">
-                                            <div class="logo"> <a href="/"><img src="images/logo.png" alt="#"></a> </div>
+                                            <div class="logo"> <a href="/"><img src="../images/logo.png" alt="#"></a> </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="right_header_info">
                                         <ul>
-                                            <li><img style="margin-right: 15px;" src="images/phone_icon.png" alt="#" /><a href="#">987-654-3210</a></li>
-                                            <li><img style="margin-right: 15px;" src="images/mail_icon.png" alt="#" /><a href="#">bangerco@gmail.com</a></li>
-                                            <li><img src="images/search_icon.png" alt="#" /></li>
+                                            <li><img style="margin-right: 15px;" src="../images/phone_icon.png" alt="#" /><a href="#">987-654-3210</a></li>
+                                            <li><img style="margin-right: 15px;" src="../images/mail_icon.png" alt="#" /><a href="#">bangerco@gmail.com</a></li>
+                                            <li><img src="../images/search_icon.png" alt="#" /></li>
                                             <li>
                                                 <button type="button" id="sidebarCollapse">
-                                                    <img src="images/menu_icon.png" alt="#" />
+                                                    <img src="../images/menu_icon.png" alt="#" />
                                                 </button>
                                             </li>
                                         </ul>
@@ -140,92 +140,86 @@
             </div>
         </section>
         <!-- end section -->
-        <section style="margin-top:50px" id="contact">
+        <div id="about" class="section layout_padding">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="full center">
-                            <h2 class="heading_main orange_heading">Sign Up</h2>
+                <div style="horizontal-align:top" class="row">
+                    <div class="col-lg-4 margin_top_30">
+                        <div class="full margin_top_30">
+                            <h3 style="font-size:48px" class="main_heading _left_side margin_top_30">Rent this Car</h3>
+                            <c:set var="vehicleId" value="${vehicle.vehicleId}"/>
+                            <div class="col-sm">
+                                <div style="margin-top:15px" class="card" style="width: 18rem;">
+                                    <img style="width:100%; height:250px" class="card-img-top"
+                                         src="../images/${vehicle.imageName}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Licence Plate Number : ${vehicle.plateNumber}</h5>
+                                        <p style="font-size:14px" class="card-text">Transmission
+                                            - ${vehicle.transmission}</p>
+                                        <p style="font-size:14px" class="card-text">Fuel Type - ${vehicle.fuelType}</p>
+                                        <p style="font-size:14px" class="card-text">Price Per Day -
+                                            $${vehicle.pricePerDay}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+
+                    <div style="border: 2px solid #161c34; border-radius:5px;margin-top: 60px" class="col-lg-8">
                         <div class="full">
                             <div class="contact_form">
-                                <form action="/user/userRegister" method="post" enctype="multipart/form-data">
+                                <form action="/bookings/save" method="post" id="bookingform">
                                     <fieldset class="row">
                                         <div class="col-md-12">
-                                            <div class="full field">
-                                                First Name
-                                                <input type="text" placeholder="First Name" name="firstName"/>
+                                            <div class="full">
+                                                <div class="row">
+                                                    <div  style="width:48%;margin-right: 2%" class="column field">
+                                                        Date of Collection
+                                                        <input type="hidden" name="vehicleId" id="vehicleId" value="${vehicle.vehicleId}" />
+                                                        <input type="date" id="startDate" name="startDate"/>
+                                                    </div>
+                                                    <div style="width:48%;margin-left:2%" class="column field">
+                                                        Date of Return
+                                                        <input type="date" id="endDate" name="endDate"/>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="full field">
-                                                Last Name
-                                                <input type="text" placeholder="Last Name" name="lastName"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="full field">
-                                               Email
-                                                <input type="email" placeholder="Email" name="email"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="full field">
-                                                Contact Number
-                                                <input type="text" placeholder="Phone" name="mobile"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="full field">
-                                                Date of Birth
-                                                <input type="date" name=dob id="dob" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="full field">
-                                                Address
-                                                <input type="text" placeholder="Address" name="Address"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Username
-                                                <input type="text" placeholder="Username" name="userName"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Password
-                                                <input type="password" placeholder="Password" name="password"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Utility Bill
-                                                <input type="file" name="file"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="half field">
-                                                Driving Licence
-                                                <input type="file" name="licencefile"/>
+                                            <div class="full">
+                                                <div class="row">
+                                                    <div style="width:30%;margin-right:2%" class="column field">
+                                                        Baby Seat
+                                                        <input type="checkbox" placeholder="Phone" name="number"/>
+                                                    </div>
+                                                    <div style="width:30%;margin-right:2%" class="column field">
+                                                        Wine Chiller
+                                                        <input type="checkbox" placeholder="Phone" name="number"/>
+                                                    </div>
+                                                    <div style="width:30%;margin-right:2%" class="column field">
+                                                        Sat Nav
+                                                        <input type="checkbox" placeholder="Phone" name="number"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="full center">
-                                                <input class="submit_bt btn btn-primary" value="Register" type="submit" name="Register"/>
+                                                <button onclick="submitForm()" class="submit_bt">Book Now</button>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </div>
+                    </div>
+
                 </div>
+
             </div>
-        </section>
+        </div>
+
+
         <!-- end section -->
         <!-- footer -->
         <footer>
@@ -311,12 +305,12 @@
 <div class="overlay"></div>
 
 <!-- Javascript files-->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <!-- Scrollbar Js Files -->
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../js/custom.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#sidebar").mCustomScrollbar({
@@ -338,25 +332,72 @@
 </script>
 
 <script>
-    // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-    // Australia.
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: {lat: 40.645037, lng: -73.880224},
-        });
+    $(function(){
+        var dtToday = new Date();
 
-        var image = 'images/location_point.png';
-        var beachMarker = new google.maps.Marker({
-            position: {lat: 40.645037, lng: -73.880224},
-            map: map,
-            icon: image
-        });
-    }
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#startDate').attr('min', maxDate);
+        $('#endDate').attr('min', maxDate);
+    });
 </script>
-<!-- google map js -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
-<!-- end google map js -->
+<script>
+    function submitForm()
+    {
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            let oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+            let sDate = new Date(document.getElementById('startDate').value);
+            let eDate = new Date(document.getElementById('endDate').value);
+            let diffDays = Math.round(Math.abs((sDate - eDate) / oneDay));
+            let bookable = true;
+            let message = "Sorry.This Vehicle is Booked on the following dates \n";
+            var array=[];
+            <c:forEach var = "it" items = "${bookings}">
+                array.push("${it}");
 
+            </c:forEach>
+            event.preventDefault();
+            if(diffDays>14){
+                window.alert("The Maximum Period You Could Rent a Vehicle is 14 Days");
+            }
+            else{
+                console.log("Executing else");
+                let i = ${bookings.size()};
+                console.log(i);
+                var n=0;
+                for(n;n<i;n++){
+                    console.log(array[n]);
+                    if((sDate >= new Date(array[n]) && sDate <= new Date(array[n+1])) && (eDate => new Date(array[n]) && eDate <= new Date(array[n+1]))){
+                        console.log(bookable);
+                        bookable=false;
+                    }
+                    message += array[n]+" to "+array[n+1]+"\n";
+                    n=n+1;
+                }
+                if(sDate>eDate){
+                    window.alert("Error: Returning Cannot be a past date than the booking date");
+                }else{
+                    if(bookable){
+                        document.getElementById("bookingform").submit();
+                    }else{
+                        window.alert(message);
+                    }
+                }
+
+            }
+        });
+
+    }
+
+</script>
 </body>
 </html>
