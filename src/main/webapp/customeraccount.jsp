@@ -226,6 +226,9 @@
                         </div>
                         <div class="row">
                             <c:forEach var="booking" items="${bookings}">
+                                <c:url value = "/bookings/booking" var = "url">
+                                    <c:param name = "bookingId" value = "${booking.bookingId}"/>
+                                </c:url>
                                 <div class="col-sm">
                                     <div class="card" style="width: 13rem;">
                                         <div class="card-body">
@@ -237,7 +240,7 @@
                                                 : ${booking.startDate}</p>
                                             <p style="font-size:11px" class="card-text">Ending Date
                                                 : ${booking.endDate}</p>
-                                            <a style="margin-top:10px" href="#" class="btn btn-primary">Update
+                                            <a style="margin-top:10px" href="${url}" class="btn btn-primary">View
                                                 Booking</a>
                                         </div>
                                     </div>

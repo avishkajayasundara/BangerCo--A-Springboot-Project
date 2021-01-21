@@ -26,8 +26,8 @@ public class BookingMapper {
     public static BookingDto bookingToBookingDtoMapper(Booking booking) {
         BookingDto bookingDto = new BookingDto();
         bookingDto.setBookingId(booking.getBookingId());
-        bookingDto.setStartDate(booking.getStartDate().toString());
-        bookingDto.setEndDate(booking.getEndDate().toString());
+        bookingDto.setStartDate(booking.getStartDate().toLocalDate().toString());
+        bookingDto.setEndDate(booking.getEndDate().toLocalDate().toString());
         bookingDto.setStatus(booking.getState());
         if (!isEmpty(booking.getVehicleList())) {
             bookingDto.setVehicleDtos(booking.getVehicleList().

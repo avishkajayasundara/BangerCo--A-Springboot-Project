@@ -159,9 +159,9 @@ public class BookingServiceImpl implements BookingService {
             Equipment equipment = null;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             if (!StringUtils.isEmpty(bookingDto.getStartDate()))
-                booking.setStartDate(parse(bookingDto.getStartDate(), formatter));
+                booking.setStartDate(parse(bookingDto.getStartDate()+" 00:00", formatter));
             if (!StringUtils.isEmpty(bookingDto.getEndDate()))
-                booking.setEndDate(parse(bookingDto.getEndDate(), formatter));
+                booking.setEndDate(parse(bookingDto.getEndDate()+" 00:00", formatter));
             if (bookingDto.getVehicleId() != null)
                 vehicle = vehicleRepository.findById(bookingDto.getVehicleId()).orElse(null);
             if (!isEmpty(bookingDto.getEquipmentId())) {
@@ -189,5 +189,17 @@ public class BookingServiceImpl implements BookingService {
     public void deleteBooking(long bookingId) {
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
         bookingRepository.delete(booking);
+    }
+
+    @Override
+    public Booking findBookingById(long bookingId) {
+        return bookingRepository.findById(bookingId).get();
+    }
+
+    @Override
+    public void addEquipmentToBooking(long equipmentId, long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId).get();
+        booking.getEquipmentList().add(equipmentRepository.findById(equipmentId).get());
+        bookingRepository.save(booking);
     }
 }

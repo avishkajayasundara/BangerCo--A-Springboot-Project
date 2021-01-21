@@ -70,12 +70,10 @@ public class UserController {
 								@RequestParam("mobile") String mobile,
 								@RequestParam("Address") String Address) throws NoSuchAlgorithmException {
 
-		String DrivingLicense="";
 		User response = userservice.registerUser(username, email, bCryptPasswordEncoder.encode(password) , firstName, lastName, dob.toString(), mobile, licencefile, Address, file);
 		ModelAndView mv = new ModelAndView();
 		ModelMap model = new ModelMap();
 		return new ModelAndView("redirect:/", model);
-		
 	}
 	
 	@RequestMapping(value = "/blacklistUser", method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE)

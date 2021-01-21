@@ -5,17 +5,21 @@ import com.eirlss.dto.BookingDto;
 import com.eirlss.dto.VehicleDto;
 import com.eirlss.model.Booking;
 import com.eirlss.model.Vehicle;
+import com.eirlss.service.EquipmentService;
 import com.eirlss.service.UserService;
 import com.eirlss.service.VehicleServices;
 import com.eirlss.service.impl.BookingServiceImpl;
+import com.eirlss.util.mapper.BookingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -32,25 +36,29 @@ public class BookingController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EquipmentService equipmentService;
+
     @PostMapping(value = "/save")
-    public BookingDto saveBooking(BookingDto bookingDto,@AuthenticationPrincipal LoggedInUserDetails loggedInUser) throws NoSuchAlgorithmException {
+    public ModelAndView saveBooking(BookingDto bookingDto, @AuthenticationPrincipal LoggedInUserDetails loggedInUser) throws NoSuchAlgorithmException {
         long id = userService.getByUserName(loggedInUser.getUsername()).getUserid();
         bookingDto.setUserId(id);
-        return bookingServiceImpl.saveBooking(bookingDto);
+        BookingDto booking =  bookingServiceImpl.saveBooking(bookingDto);
+        return new ModelAndView("redirect:/");
     }
 
     @GetMapping(value = "/new-booking")
-    public ModelAndView loadNewBookingPage(long vehicleId,@AuthenticationPrincipal LoggedInUserDetails loggedInUser) {
+    public ModelAndView loadNewBookingPage(long vehicleId, @AuthenticationPrincipal LoggedInUserDetails loggedInUser) {
         Vehicle vehicle = vehicleServices.get(vehicleId);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("vehicle",vehicle);
+        mv.addObject("vehicle", vehicle);
         List<String> bookingDates = new ArrayList<String>();
-        for(Booking b:vehicle.getBookings()){
+        for (Booking b : vehicle.getBookings()) {
             bookingDates.add(b.getStartDate().toLocalDate().toString());
             bookingDates.add(b.getEndDate().toLocalDate().toString());
         }
-        mv.addObject("bookings",bookingDates);
-        mv.addObject("user",loggedInUser.getUsername());
+        mv.addObject("bookings", bookingDates);
+        mv.addObject("user", loggedInUser.getUsername());
         mv.setViewName("/bookingpage.jsp");
         return mv;
     }
@@ -65,15 +73,55 @@ public class BookingController {
         return bookingServiceImpl.findAllBookings();
     }
 
-    @PutMapping(value = "/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public BookingDto updateBooking(@RequestBody BookingDto bookingDto,@PathVariable("bookingId") long bookingId) {
+    @PostMapping(value = "/update")
+    public ModelAndView updateBooking(BookingDto bookingDto,long bookingId) {
         bookingDto.setBookingId(bookingId);
-        return bookingServiceImpl.updateBooking(bookingDto);
+        BookingDto b = bookingServiceImpl.updateBooking(bookingDto);
+        return new ModelAndView("redirect:/user/account");
     }
 
     @DeleteMapping(value = "/{bookingId}")
     public void deleteBooking(@PathVariable("bookingId") long bookingId) {
-         bookingServiceImpl.deleteBooking(bookingId);
+        bookingServiceImpl.deleteBooking(bookingId);
+    }
+
+    @GetMapping(value = "/booking")
+    public ModelAndView getBookingById(long bookingId,@AuthenticationPrincipal LoggedInUserDetails loggedInUser) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/updateBooking.jsp");
+        Booking booking = bookingServiceImpl.findBookingById(bookingId);
+        List<Booking> bookingList = booking.getVehicleList().get(0).getBookings();
+
+
+
+        Iterator<Booking> iterator = bookingList.iterator();
+        while (iterator.hasNext()) {
+            Booking v = iterator.next();
+            if (v.getBookingId() == bookingId) {
+                // Do something
+                iterator.remove();
+            }
+        }
+        mv.addObject("user", loggedInUser.getUsername());
+        mv.addObject("booking", BookingMapper.bookingToBookingDtoMapper(booking));
+        mv.addObject("bookings", bookingList);
+        mv.addObject("vehicle", booking.getVehicleList().get(0));
+        mv.addObject("equipment",equipmentService.getAllEquipment());
+        mv.addObject("bookedEq",booking.getEquipmentList());
+        return mv;
+    }
+    @GetMapping(value = "/delete")
+    public ModelAndView customerDeleteBooking(long bookingId) {
+        bookingServiceImpl.deleteBooking(bookingId);
+        return new ModelAndView("redirect:/user/account");
+    }
+
+    @GetMapping(value = "/addEquipment")
+    public ModelAndView addEquipmentToBooking(long equipmentId,long bookingId){
+        bookingServiceImpl.addEquipmentToBooking(equipmentId,bookingId);
+        ModelMap model = new ModelMap();
+        model.put("bookingId",bookingId);
+        return new ModelAndView("redirect:/bookings/booking",model);
     }
 
 }

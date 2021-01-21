@@ -210,7 +210,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="half field">
-                                                Driving Licence
+                                                Driving Licence (Please Ensure the file name is set to your driving licence number)
                                                 <input type="file" name="licencefile"/>
                                             </div>
                                         </div>

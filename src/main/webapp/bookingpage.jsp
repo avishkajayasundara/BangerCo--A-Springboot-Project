@@ -157,7 +157,7 @@
                                             - ${vehicle.transmission}</p>
                                         <p style="font-size:14px" class="card-text">Fuel Type - ${vehicle.fuelType}</p>
                                         <p style="font-size:14px" class="card-text">Price Per Day -
-                                            $${vehicle.pricePerDay}</p>
+                                            £${vehicle.pricePerDay}</p>
                                     </div>
                                 </div>
                             </div>
@@ -189,16 +189,11 @@
                                             <div class="full">
                                                 <div class="row">
                                                     <div style="width:30%;margin-right:2%" class="column field">
-                                                        Baby Seat
-                                                        <input type="checkbox" placeholder="Phone" name="number"/>
                                                     </div>
                                                     <div style="width:30%;margin-right:2%" class="column field">
-                                                        Wine Chiller
-                                                        <input type="checkbox" placeholder="Phone" name="number"/>
+                                                        <input disabled type="text" placeholder="Total Price" name="price" id="totalPrice"/>
                                                     </div>
                                                     <div style="width:30%;margin-right:2%" class="column field">
-                                                        Sat Nav
-                                                        <input type="checkbox" placeholder="Phone" name="number"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,7 +269,7 @@
                         <div class="full">
                             <h4 class="widget_heading">Contact Details</h4>
                             <div class="full cont_footer">
-                                <p><strong>Banger&Co : Adderess</strong><br><br>Newyork 10012, USA<br>Phone: +987 654 3210<br>demo@gmail.com</p>
+                                <p><strong>Banger&Co : Address</strong><br><br>Newyork 10012, USA<br>Phone: +987 654 3210<br>demo@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -387,6 +382,9 @@
                     window.alert("Error: Returning Cannot be a past date than the booking date");
                 }else{
                     if(bookable){
+                        var total = ${vehicle.pricePerDay} * diffDays;
+                        window.alert("Your Booking has been made.\n Total amount : £"+total+"\n" +
+                            "You Can Add Accessories to your booking from your account page");
                         document.getElementById("bookingform").submit();
                     }else{
                         window.alert(message);

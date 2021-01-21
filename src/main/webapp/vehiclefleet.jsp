@@ -161,7 +161,7 @@
                                         - ${vehicle.transmission}</p>
                                     <p style="font-size:14px" class="card-text">Fuel Type - ${vehicle.fuelType}</p>
                                     <p style="font-size:14px" class="card-text">Price Per Day -
-                                        $${vehicle.pricePerDay}</p>
+                                        £${vehicle.pricePerDay}</p>
                                     <a style="margin-top:10px;border-color:#161c34;background-color: #161c34" href="${url}" class="btn btn-primary">Book Now</a>
                                 </div>
                             </div>

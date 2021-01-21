@@ -35,7 +35,6 @@ public class Booking {
             joinColumns = @JoinColumn(name = "bookingId"),
             inverseJoinColumns = @JoinColumn(name = "equipmentId"))
     private List<Equipment> equipmentList;
-    ;
 
     public Booking() {
 

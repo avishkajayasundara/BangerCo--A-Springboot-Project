@@ -46,4 +46,9 @@ public class EquipmentServiceImpl implements EquipmentService {
 		equipmentRepository.deleteById(id);
 	}
 
+	@Override
+	public List<Equipment> getAllEquipment() {
+		return equipmentRepository.findAll();
+	}
+
 }
