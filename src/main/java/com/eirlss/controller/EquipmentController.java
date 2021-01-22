@@ -28,10 +28,7 @@ EquipmentServiceImpl equipmentServiceImpl;
 public String addEquipment(@RequestBody Equipment equipment){
 
 	equipment.setAvailability(true);
-	
-	
 	equipmentServiceImpl.save(equipment);
-	
 	return "Successfully Added the Equipment";
 	
 }

@@ -23,7 +23,7 @@ public interface UserService {
     void delete(long id);
     boolean isValid(User user);
     HashMap<Long, User> getPendingCustomers();
-    void uploadUserUtility(MultipartFile file,MultipartFile licence, User user);
+    void uploadFilesToDb(MultipartFile file, MultipartFile licence, User user);
     void approveUser(Long userId, String state);
 
 }

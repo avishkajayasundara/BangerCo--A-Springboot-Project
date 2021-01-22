@@ -2,14 +2,11 @@ package com.eirlss.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 
 import com.eirlss.auth.LoggedInUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.eirlss.dto.ModelUser;
-import com.eirlss.model.JwtResponse;
 import com.eirlss.model.User;
 import com.eirlss.service.impl.UserServiceImpl;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,10 +81,4 @@ public class UserController {
 		return "Success";
 		
 	}
-//	@RequestMapping(value = "/getAllUsers", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public Collection<ModelUser> viewCustomers(Model model) {
-//
-//		HashMap<Long, ModelUser> map = userservice.listAll();
-//		return map.values();
-//	}
 }

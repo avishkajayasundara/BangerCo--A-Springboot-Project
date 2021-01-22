@@ -142,7 +142,7 @@
                                         <h4>Welcome to</h4>
                                         <h3>Banger<br>&Co</h3>
                                         <div class="button_section">
-                                            <a href="#">Book Now</a>
+                                            <a href="/vehicles">Book Now</a>
                                             <a href="#">About Us</a>
                                         </div>
                                     </div>

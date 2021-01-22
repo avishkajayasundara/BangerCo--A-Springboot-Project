@@ -1,27 +1,29 @@
 package com.eirlss.model;
 
-import org.springframework.data.annotation.Persistent;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-@Persistent
-public class FlaggedLicences {
+public class FlaggedLicenceHolder implements Serializable {
+
     @Id
+    @Length(max = 15)
     String licenseNo;
     String offence;
-    String dateOfOffence;
+    String dateTimeofOffence;
     String status;
 
-    public FlaggedLicences(String licenseNo, String offence, String dateOfOffence, String status) {
+    public FlaggedLicenceHolder(String licenseNo, String offence, String dateTimeofOffence, String status) {
         this.licenseNo = licenseNo;
         this.offence = offence;
-        this.dateOfOffence = dateOfOffence;
+        this.dateTimeofOffence = dateTimeofOffence;
         this.status = status;
     }
 
-    public FlaggedLicences() {
+    public FlaggedLicenceHolder() {
     }
 
     public String getLicenseNo() {
@@ -40,12 +42,12 @@ public class FlaggedLicences {
         this.offence = offence;
     }
 
-    public String getDateOfOffence() {
-        return dateOfOffence;
+    public String getDateTimeofOffence() {
+        return dateTimeofOffence;
     }
 
-    public void setDateOfOffence(String dateOfOffence) {
-        this.dateOfOffence = dateOfOffence;
+    public void setDateTimeofOffence(String dateTimeofOffence) {
+        this.dateTimeofOffence = dateTimeofOffence;
     }
 
     public String getStatus() {

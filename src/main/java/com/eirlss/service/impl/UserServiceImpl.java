@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 		user.setState("Approved");
 		user.setRole("CUSTOMER");
 		user.setContact(contact);
-		uploadUserUtility(file,DrivingLicense,user);
+		uploadFilesToDb(file,DrivingLicense,user);
 		return user;
 	}
 	@Override
@@ -119,17 +119,18 @@ public class UserServiceImpl implements UserService {
 
 	}
 	@Override
-	public void uploadUserUtility(MultipartFile file,MultipartFile licence, User user) {
+	public void uploadFilesToDb(MultipartFile file, MultipartFile licence, User user) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		String licenceName = StringUtils.cleanPath(file.getOriginalFilename());
+		String licenceName = StringUtils.cleanPath(licence.getOriginalFilename());
 
 		try {
 			Path path = Paths
-					.get("C:\\Users\\User\\Desktop\\EIRLS\\BangerCoEirlss\\src\\main\\webapp\\images\\licences" + fileName);
+					.get("C:\\Users\\User\\Desktop\\EIRLS\\BangerCoEirlss\\src\\main\\webapp\\images\\licences\\" + licenceName);
 			Files.copy(licence.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-			path = Paths
+
+			Path path2 = Paths
 					.get("C:\\Users\\User\\Desktop\\EIRLS\\BangerCoEirlss\\src\\main\\webapp\\images\\utility\\" + fileName);
-			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file.getInputStream(), path2, StandardCopyOption.REPLACE_EXISTING);
 
 			user.setState("pending");
 			user.setUtilityBill(fileName);

@@ -4,6 +4,7 @@ import com.eirlss.auth.LoggedInUserDetails;
 import com.eirlss.dto.BookingDto;
 import com.eirlss.dto.VehicleDto;
 import com.eirlss.model.Booking;
+import com.eirlss.model.User;
 import com.eirlss.model.Vehicle;
 import com.eirlss.service.EquipmentService;
 import com.eirlss.service.UserService;
@@ -41,10 +42,19 @@ public class BookingController {
 
     @PostMapping(value = "/save")
     public ModelAndView saveBooking(BookingDto bookingDto, @AuthenticationPrincipal LoggedInUserDetails loggedInUser) throws NoSuchAlgorithmException {
-        long id = userService.getByUserName(loggedInUser.getUsername()).getUserid();
-        bookingDto.setUserId(id);
-        BookingDto booking =  bookingServiceImpl.saveBooking(bookingDto);
-        return new ModelAndView("redirect:/");
+        User user = userService.getByUserName(loggedInUser.getUsername());
+        bookingDto.setUserId(user.getUserid());
+        if(bookingServiceImpl.checkIfFraudUser(user.getDrivingLinence().split("\\.")[0])){
+            return new ModelAndView("redirect:/booking-error-fraud-user");
+        }else{
+            BookingDto booking =  bookingServiceImpl.saveBooking(bookingDto);
+            if(booking != null){
+                return new ModelAndView("redirect:/thank-you");
+            }
+            else{
+                return new ModelAndView("redirect:/booking-error");
+            }
+        }
     }
 
     @GetMapping(value = "/new-booking")
@@ -110,6 +120,7 @@ public class BookingController {
         mv.addObject("bookedEq",booking.getEquipmentList());
         return mv;
     }
+
     @GetMapping(value = "/delete")
     public ModelAndView customerDeleteBooking(long bookingId) {
         bookingServiceImpl.deleteBooking(bookingId);

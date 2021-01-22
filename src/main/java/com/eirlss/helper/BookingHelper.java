@@ -31,27 +31,5 @@ public class BookingHelper {
         return isFraudUser;
     }
 
-    public static boolean isLicenseBlacklisted(String licenseNumber) {
-        boolean isBlacklisted = false;
-        List<List<String>> records = new ArrayList<>();
-        List<String> flatRecords = null;
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/asset/banger_blacklisted_licenses.csv"));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] values = line.split(COMMA_DELIMITER);
-                records.add(Arrays.asList(values));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (!CollectionUtils.isEmpty(records)) {
-            flatRecords = records.stream().flatMap(record -> record.stream()).collect(Collectors.toList());
-            isBlacklisted = flatRecords.stream().anyMatch(record -> record.equals(licenseNumber));
-        }
-        return isBlacklisted;
-    }
 }
 
